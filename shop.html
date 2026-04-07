@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — SimplicityCo Movement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .shop-hero-split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 80px; }
+    .mat-showcase { border-radius: 28px; overflow: hidden; height: 560px; position: relative; }
+    .mat-showcase img { width: 100%; height: 100%; object-fit: cover; }
+    .mat-badge { position: absolute; top: 24px; left: 24px; background: #fff; border-radius: 100px; padding: 8px 18px; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--charcoal); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+    .mat-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+    .mat-feature { background: var(--cream); border-radius: 14px; padding: 16px 18px; display: flex; align-items: center; gap: 10px; }
+    .mat-feature-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink-deep); flex-shrink: 0; }
+    .mat-feature-text { font-size: 12px; font-weight: 500; }
+
+    .coming-soon-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 48px; }
+    .coming-soon-card { background: var(--cream); border-radius: 20px; height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+    .coming-soon-label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pink-deep); }
+    .coming-soon-name { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--mid); }
+    .coming-soon-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; background: var(--pink-light); color: var(--pink-deep); padding: 4px 12px; border-radius: 100px; }
+
+    @media (max-width: 900px) {
+      .shop-hero-split { grid-template-columns: 1fr; gap: 40px; }
+      .coming-soon-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .coming-soon-grid { grid-template-columns: 1fr; }
+      .mat-features { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="page-body">
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo"><img src="images/logo.jpg" alt="SimplicityCo Movement" /></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work-with-me.html">Work With Me</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="shop.html" class="active">Shop</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="connect.html" class="nav-cta">Connect</a></li>
+    </ul>
+    <div class="nav-hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-hero-tag">Shop</div>
+      <h1>Move in <em>style.</em></h1>
+      <p class="page-hero-sub">Explore our signature SimplicityCo Movement collection — designed for empowered movement and community workouts. More products coming soon.</p>
+    </div>
+  </div>
+
+  <!-- MAIN MAT PRODUCT -->
+  <section style="background:#fff;">
+    <div class="container">
+      <div class="shop-hero-split">
+        <div class="mat-showcase">
+          <img src="images/event-bands-overhead.jpg" alt="SimplicityCo Signature Workout Mat" />
+          <div class="mat-badge">Signature Collection</div>
+        </div>
+        <div>
+          <div class="section-tag">Featured Product</div>
+          <h2 class="section-title">SimplicityCo<br /><em>Signature Workout Mat</em></h2>
+          <p class="section-sub">Our signature workout mat was designed for the woman who takes her movement seriously — and looks good doing it. Built for community workouts, at-home training, and everything in between.</p>
+
+          <div class="mat-features">
+            <div class="mat-feature"><span class="mat-feature-dot"></span><span class="mat-feature-text">Non-slip surface</span></div>
+            <div class="mat-feature"><span class="mat-feature-dot"></span><span class="mat-feature-text">Extra thick cushioning</span></div>
+            <div class="mat-feature"><span class="mat-feature-dot"></span><span class="mat-feature-text">Branded SimplicityCo design</span></div>
+            <div class="mat-feature"><span class="mat-feature-dot"></span><span class="mat-feature-text">Lightweight &amp; portable</span></div>
+          </div>
+
+          <div style="margin-top:40px;padding-top:32px;border-top:1px solid var(--pink-light);">
+            <div style="font-family:var(--serif);font-size:40px;font-weight:300;color:var(--charcoal);margin-bottom:20px;">Coming Soon</div>
+            <p style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.7;margin-bottom:28px;">We're putting the finishing touches on our shop. Join the membership to be first to know when the mats drop — and get members-only pricing.</p>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;">
+              <a href="membership.html" class="btn-primary">Join for Early Access</a>
+              <a href="connect.html" class="btn-outline">Get Notified</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMING SOON -->
+  <section style="background:var(--cream);">
+    <div class="container" style="text-align:center;">
+      <div class="section-tag">More Coming Soon</div>
+      <h2 class="section-title">The collection is<br /><em>growing.</em></h2>
+      <p class="section-sub" style="margin:16px auto 0;">More products designed for empowered movement are on the way. Join the membership to be the first to know.</p>
+      <div class="coming-soon-grid">
+        <div class="coming-soon-card">
+          <div class="coming-soon-label">Coming Soon</div>
+          <div class="coming-soon-name">Resistance Bands</div>
+          <div class="coming-soon-tag">Notify Me</div>
+        </div>
+        <div class="coming-soon-card">
+          <div class="coming-soon-label">Coming Soon</div>
+          <div class="coming-soon-name">Apparel</div>
+          <div class="coming-soon-tag">Notify Me</div>
+        </div>
+        <div class="coming-soon-card">
+          <div class="coming-soon-label">Coming Soon</div>
+          <div class="coming-soon-name">Accessories</div>
+          <div class="coming-soon-tag">Notify Me</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AS SEEN AT EVENTS -->
+  <section style="background:#fff;">
+    <div class="container" style="text-align:center;">
+      <div class="section-tag">As Seen at Our Events</div>
+      <h2 class="section-title">The mats that started<br /><em>the movement.</em></h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:40px;">
+        <div style="border-radius:20px;overflow:hidden;height:260px;"><img src="images/event-circle.jpg" alt="Event" style="width:100%;height:100%;object-fit:cover;" /></div>
+        <div style="border-radius:20px;overflow:hidden;height:260px;"><img src="images/event-bands-overhead.jpg" alt="Event" style="width:100%;height:100%;object-fit:cover;" /></div>
+        <div style="border-radius:20px;overflow:hidden;height:260px;"><img src="images/event-group-photo.jpg" alt="Event" style="width:100%;height:100%;object-fit:cover;" /></div>
+      </div>
+      <div style="margin-top:36px;">
+        <a href="events.html" class="btn-primary">Join Our Next Event</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:var(--charcoal);">
+    <div class="container" style="text-align:center;">
+      <div class="section-tag" style="color:var(--pink);">Be First</div>
+      <h2 class="section-title" style="color:#fff;margin-bottom:12px;">Don't miss the <em style="color:var(--pink);">drop.</em></h2>
+      <p style="font-size:14px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.85;max-width:400px;margin:16px auto 36px;">Members get first access and exclusive pricing on everything we release. Join for just $10/month.</p>
+      <a href="membership.html" class="btn-primary">Join the Membership</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Simplicityco.<em>Movement</em></div>
+        <p class="footer-tagline">Social fitness events in Los Angeles. Built for women who want to move, connect, and glow.</p>
+        <div class="footer-social"><a href="#" class="social-btn">IG</a><a href="#" class="social-btn">TT</a><a href="connect.html" class="social-btn">✉</a></div>
+      </div>
+      <div class="footer-col"><h4>Navigate</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li><li><a href="membership.html">Membership</a></li><li><a href="about.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Work With Me</h4><ul class="footer-links"><li><a href="work-with-me.html#brands">Brand Partnerships</a></li><li><a href="work-with-me.html#instructors">Instructors</a></li><li><a href="work-with-me.html#training">Personal Training</a></li></ul></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul class="footer-links"><li><a href="shop.html">Shop Mats</a></li><li><a href="events.html#private">Private Events</a></li><li><a href="connect.html">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2025 SimplicityCo Movement. All rights reserved.</span><span style="color:rgba(255,255,255,0.3);">Made with love in Los Angeles</span></div>
+  </footer>
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+    function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+  </script>
+</body>
+</html>

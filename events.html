@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events — SimplicityCo Movement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* event type tabs */
+    .event-tabs { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
+    .event-tab { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px 24px; border-radius: 100px; border: 1.5px solid var(--pink-light); color: var(--mid); cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .event-tab.active, .event-tab:hover { background: var(--charcoal); color: #fff; border-color: var(--charcoal); }
+
+    /* event type showcase */
+    .event-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+    .event-showcase-card { border-radius: 24px; overflow: hidden; position: relative; height: 480px; }
+    .event-showcase-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .event-showcase-card:hover img { transform: scale(1.03); }
+    .event-showcase-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(42,42,42,0.8) 0%, transparent 50%); display: flex; flex-direction: column; justify-content: flex-end; padding: 40px 36px; }
+    .event-showcase-tag { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 100px; display: inline-block; margin-bottom: 12px; }
+    .event-showcase-title { font-family: var(--serif); font-size: 32px; font-weight: 400; color: #fff; line-height: 1.1; margin-bottom: 10px; }
+    .event-showcase-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.65; }
+
+    /* upcoming events */
+    .event-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; }
+    .event-card { background: #fff; border-radius: 20px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid var(--pink-light); }
+    .event-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.09); }
+    .event-card-img { height: 200px; background: linear-gradient(135deg,var(--pink-light),rgba(242,189,208,0.4)); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .event-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .event-badge { position: absolute; top: 14px; right: 14px; background: #fff; font-size: 9px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; color: var(--charcoal); }
+    .event-badge.low { background: #fce8f0; color: #c0616a; }
+    .event-card-body { padding: 24px; }
+    .event-date { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pink-deep); margin-bottom: 8px; }
+    .event-name { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.2; margin-bottom: 8px; }
+    .event-desc { font-size: 12.5px; font-weight: 300; line-height: 1.7; color: var(--mid); margin-bottom: 20px; }
+    .event-meta { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--pink-light); }
+    .event-location { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--mid); }
+    .event-spots { font-size: 11px; font-weight: 600; color: var(--charcoal); }
+    .event-spots.low { color: #c0616a; }
+
+    .coming-soon-banner { background: var(--pink-light); border-radius: 20px; padding: 48px; text-align: center; margin-top: 40px; }
+    .coming-soon-banner h3 { font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 10px; }
+    .coming-soon-banner p { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.7; max-width: 400px; margin: 0 auto 24px; }
+
+    /* private events */
+    .private-split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .private-uses { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+    .private-use-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--cream); border-radius: 100px; padding: 10px 20px; font-size: 12px; font-weight: 500; color: var(--charcoal); width: fit-content; }
+    .private-use-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink-deep); }
+
+    /* vendor */
+    .vendor-benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
+    .vendor-benefit { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px; }
+    .vendor-benefit-title { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+    .vendor-benefit-desc { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+    @media (max-width: 900px) {
+      .event-showcase { grid-template-columns: 1fr; }
+      .event-cards { grid-template-columns: 1fr; }
+      .private-split { grid-template-columns: 1fr; gap: 40px; }
+      .vendor-benefits { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="page-body">
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo"><img src="images/logo.jpg" alt="SimplicityCo Movement" /></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work-with-me.html">Work With Me</a></li>
+      <li><a href="events.html" class="active">Events</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="connect.html" class="nav-cta">Connect</a></li>
+    </ul>
+    <div class="nav-hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-hero-tag">Events</div>
+      <h1>Check out our<br /><em>event calendar.</em></h1>
+      <p class="page-hero-sub">I host two kinds of experiences: movement events, where we romanticize working out together, and networking workshops for women's empowerment. Whether you want to sweat or grow your network — we've got something for you.</p>
+      <div class="event-tabs" style="margin-top:28px;">
+        <a href="#movement" class="event-tab active">Movement Events</a>
+        <a href="#workshops" class="event-tab">Workshops</a>
+        <a href="#private" class="event-tab">Private Events</a>
+        <a href="#vendors" class="event-tab">Vendor Opportunities</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENT TYPES -->
+  <section id="movement" style="background:#fff;">
+    <div class="container">
+      <div class="section-tag">Two Types of Experiences</div>
+      <h2 class="section-title">Move your body or<br /><em>expand your network.</em></h2>
+      <div class="event-showcase">
+        <div class="event-showcase-card">
+          <img src="images/event-bands-overhead.jpg" alt="Movement Events" />
+          <div class="event-showcase-overlay">
+            <span class="event-showcase-tag">Movement Events</span>
+            <div class="event-showcase-title">Romanticize Working Out Together</div>
+            <p class="event-showcase-desc">High-energy, empowering workouts designed to build confidence and foster genuine community connection. Goodie bags included.</p>
+          </div>
+        </div>
+        <div class="event-showcase-card" id="workshops">
+          <img src="images/event-networking.jpg" alt="Networking Workshops" />
+          <div class="event-showcase-overlay">
+            <span class="event-showcase-tag">Networking Workshops</span>
+            <div class="event-showcase-title">Women's Empowerment Workshops</div>
+            <p class="event-showcase-desc">Intentional, elevated gatherings focused on personal growth, business &amp; brand building, and connection with like-minded women.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPCOMING EVENTS -->
+  <section style="background:var(--cream);">
+    <div class="container">
+      <div class="section-tag">Upcoming Events</div>
+      <h2 class="section-title">Reserve your <em>spot.</em></h2>
+      <p class="section-sub">Spots go fast — don't sleep on these.</p>
+
+      <div class="event-cards">
+        <div class="event-card">
+          <div class="event-card-img">
+            <img src="images/event-circle.jpg" alt="Pilates event" />
+            <div class="event-badge low">Selling Fast</div>
+          </div>
+          <div class="event-card-body">
+            <div class="event-date">Saturday, April 19 · 10:00 AM</div>
+            <h3 class="event-name">Pilates &amp; Pink Social</h3>
+            <p class="event-desc">Full-body pilates class followed by a social hour. Pink mats, resistance bands, and goodie bags included.</p>
+            <div class="event-meta">
+              <div class="event-location">📍 Los Angeles, CA</div>
+              <div class="event-spots low">8 spots left</div>
+            </div>
+          </div>
+        </div>
+        <div class="event-card">
+          <div class="event-card-img">
+            <img src="images/event-large-class.jpg" alt="Strength session" />
+            <div class="event-badge">New</div>
+          </div>
+          <div class="event-card-body">
+            <div class="event-date">Saturday, May 3 · 9:00 AM</div>
+            <h3 class="event-name">Sunrise Strength Session</h3>
+            <p class="event-desc">Outdoor strength circuit at golden hour. Dumbbells, bands, and all the morning energy you need to conquer your week.</p>
+            <div class="event-meta">
+              <div class="event-location">📍 West Hollywood, CA</div>
+              <div class="event-spots">20 spots left</div>
+            </div>
+          </div>
+        </div>
+        <div class="event-card">
+          <div class="event-card-img">
+            <img src="images/event-networking.jpg" alt="Networking workshop" />
+            <div class="event-badge">Members Only</div>
+          </div>
+          <div class="event-card-body">
+            <div class="event-date">Friday, May 16 · 6:30 PM</div>
+            <h3 class="event-name">Movement Meets Workshop</h3>
+            <p class="event-desc">An evening networking workshop for women entrepreneurs. Connect, grow, and leave with new business connections and exclusive goodies.</p>
+            <div class="event-meta">
+              <div class="event-location">📍 Brentwood, CA</div>
+              <div class="event-spots">12 spots left</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="coming-soon-banner">
+        <h3>More events coming soon</h3>
+        <p>Sign up for the membership to get first access to all upcoming events before they sell out.</p>
+        <a href="membership.html" class="btn-primary">Join for $10/month</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVATE EVENTS -->
+  <section id="private" style="background:#fff;">
+    <div class="container">
+      <div class="private-split">
+        <div>
+          <div class="section-tag">Private Event Inquiries</div>
+          <h2 class="section-title">Want a custom<br /><em>experience?</em></h2>
+          <p class="section-sub">I create custom, elevated experiences tailored to your vision and audience. Whether it's a birthday, a brand activation, or a corporate wellness retreat — let's make it unforgettable.</p>
+          <div class="private-uses">
+            <div class="private-use-tag"><span class="private-use-dot"></span>Brand Activation</div>
+            <div class="private-use-tag"><span class="private-use-dot"></span>Birthday Celebration</div>
+            <div class="private-use-tag"><span class="private-use-dot"></span>Corporate Wellness Experience</div>
+            <div class="private-use-tag"><span class="private-use-dot"></span>Women's Group Event</div>
+            <div class="private-use-tag"><span class="private-use-dot"></span>Hotel / Apartment Complex</div>
+            <div class="private-use-tag"><span class="private-use-dot"></span>Office Wellness Day</div>
+            <div class="private-use-tag"><span class="private-use-dot"></span>Business Event</div>
+          </div>
+        </div>
+        <div class="form-wrap">
+          <div class="form-title">Private Event Inquiry</div>
+          <div class="form-desc">Fill out the form and Alondra will be in touch to tailor something special.</div>
+          <div class="form-grid">
+            <div class="form-group"><label>Name</label><input type="text" placeholder="Your name" /></div>
+            <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" /></div>
+            <div class="form-group form-full">
+              <label>Event Type</label>
+              <select>
+                <option value="">Select event type</option>
+                <option>Brand Activation</option>
+                <option>Birthday Party</option>
+                <option>Corporate Wellness</option>
+                <option>Women's Group</option>
+                <option>Hotel / Apartment</option>
+                <option>Office Event</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group form-full"><label>Desired Date</label><input type="date" /></div>
+            <div class="form-group form-full"><label>Additional Details</label><textarea placeholder="Tell me about your vision, approximate guest count, and anything else that would help me plan…"></textarea></div>
+          </div>
+          <button class="btn-primary">Submit Inquiry</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENDOR OPPORTUNITIES -->
+  <section id="vendors" class="dark-section">
+    <div class="container">
+      <div class="section-tag">Vendor Opportunities</div>
+      <h2 class="section-title">Partner with a community<br /><em>that shows up.</em></h2>
+      <p class="section-sub">As a vendor, you receive direct access to 60+ engaged women per event. We drive real engagement — not impressions. We collaborate with brands that value clean, luxe, elevated wellness and community-first values.</p>
+
+      <div class="vendor-benefits">
+        <div class="vendor-benefit">
+          <div class="vendor-benefit-title">Direct Audience Access</div>
+          <div class="vendor-benefit-desc">60+ engaged, health-conscious women at every event. Your exact target demographic, in person.</div>
+        </div>
+        <div class="vendor-benefit">
+          <div class="vendor-benefit-title">High-Quality Brand Exposure</div>
+          <div class="vendor-benefit-desc">Goodie bags, sampling tables, hydration stations, and branded product displays — all organic, all intentional.</div>
+        </div>
+        <div class="vendor-benefit">
+          <div class="vendor-benefit-title">In-Person Connection</div>
+          <div class="vendor-benefit-desc">Real-time feedback and organic product discovery from your ideal consumer — not through a screen.</div>
+        </div>
+        <div class="vendor-benefit">
+          <div class="vendor-benefit-title">Content &amp; Post-Event Visibility</div>
+          <div class="vendor-benefit-desc">Social media exposure before, during, and after every event. Community-driven storytelling for your brand.</div>
+        </div>
+      </div>
+
+      <div style="max-width:700px;margin:56px auto 0;">
+        <div class="form-wrap">
+          <div class="form-title">Vendor Application</div>
+          <div class="form-desc">If your brand fits the energy — let's create something beautiful together.</div>
+          <div class="form-grid">
+            <div class="form-group"><label>Your Name</label><input type="text" placeholder="Full name" /></div>
+            <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" /></div>
+            <div class="form-group"><label>Brand Name</label><input type="text" placeholder="Your brand" /></div>
+            <div class="form-group"><label>Product / Service</label><input type="text" placeholder="What you offer" /></div>
+            <div class="form-group form-full"><label>Why do you want to partner?</label><textarea placeholder="Tell us about your brand and why you'd be a great fit for the SimplicityCo community…"></textarea></div>
+          </div>
+          <button class="btn-primary">Apply as Vendor</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Simplicityco.<em>Movement</em></div>
+        <p class="footer-tagline">Social fitness events in Los Angeles. Built for women who want to move, connect, and glow.</p>
+        <div class="footer-social"><a href="#" class="social-btn">IG</a><a href="#" class="social-btn">TT</a><a href="connect.html" class="social-btn">✉</a></div>
+      </div>
+      <div class="footer-col"><h4>Navigate</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li><li><a href="membership.html">Membership</a></li><li><a href="about.html">About</a></li></ul></div>
+      <div class="footer-col"><h4>Work With Me</h4><ul class="footer-links"><li><a href="work-with-me.html#brands">Brand Partnerships</a></li><li><a href="work-with-me.html#instructors">Instructors</a></li><li><a href="work-with-me.html#training">Personal Training</a></li><li><a href="#vendors">Vendor Opps</a></li></ul></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul class="footer-links"><li><a href="shop.html">Shop Mats</a></li><li><a href="#private">Private Events</a></li><li><a href="connect.html">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2025 SimplicityCo Movement. All rights reserved.</span><span style="color:rgba(255,255,255,0.3);">Made with love in Los Angeles</span></div>
+  </footer>
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+    function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+  </script>
+</body>
+</html>
