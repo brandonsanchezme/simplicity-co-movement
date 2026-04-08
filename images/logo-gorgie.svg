@@ -1,3 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="120" height="40">
-  <text x="60" y="28" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#1a1a1a" text-anchor="middle" letter-spacing="1">gorgie</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <text x="100" y="36" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700" fill="#e8758a" text-anchor="middle" letter-spacing="2">GORGIE</text>
+  <text x="100" y="52" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="600" fill="#e8758a" text-anchor="middle" letter-spacing="3">ENERGY DRINK</text>
 </svg>

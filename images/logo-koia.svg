@@ -1,3 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40" width="100" height="40">
-  <text x="50" y="28" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#2d6a4f" text-anchor="middle" letter-spacing="1">koia</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 60" width="160" height="60">
+  <!-- Fingerprint circle icon -->
+  <g transform="translate(8,8)">
+    <circle cx="22" cy="22" r="20" fill="none" stroke="#1a8fd1" stroke-width="2.2"/>
+    <circle cx="22" cy="22" r="14" fill="none" stroke="#1a8fd1" stroke-width="2"/>
+    <circle cx="22" cy="22" r="8" fill="none" stroke="#1a8fd1" stroke-width="2"/>
+    <circle cx="22" cy="22" r="3" fill="#1a8fd1"/>
+    <!-- fingerprint lines top -->
+    <path d="M10 10 Q22 4 34 10" fill="none" stroke="#1a8fd1" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M5 18 Q22 10 39 18" fill="none" stroke="#1a8fd1" stroke-width="1.8" stroke-linecap="round"/>
+    <!-- bottom open gap like fingerprint -->
+    <path d="M6 30 Q14 40 22 42 Q30 40 38 30" fill="none" stroke="#1a8fd1" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+  <text x="60" y="34" font-family="'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="700" fill="#1a8fd1" letter-spacing="0.5">koia</text>
+  <text x="148" y="24" font-family="Arial, sans-serif" font-size="10" fill="#1a8fd1">®</text>
 </svg>
