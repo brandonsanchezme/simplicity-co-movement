@@ -10,31 +10,50 @@
   <style>
     /* ── HOME HERO ── */
     .hero {
-      min-height: calc(100vh - 80px); display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: stretch; gap: 0;
+      position: relative;
+      min-height: calc(100vh - 80px);
+      display: flex;
       overflow: hidden;
     }
-    .hero-left {
-      padding: 80px 72px 80px 64px;
-      background: var(--cream);
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .hero-right {
-      position: relative; overflow: hidden;
-      min-height: calc(100vh - 80px);
-    }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-    .hero-right-overlay {
+    /* collage fills the full background */
+    .hero-collage {
       position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(253,247,249,0.3) 0%, transparent 40%);
+      display: flex; flex-direction: row;
+      overflow: hidden;
+    }
+    .hero-collage-inner {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-collage-panel {
+      flex: 1; overflow: hidden; flex-shrink: 0;
+    }
+    .hero-collage-panel img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .hero-collage-panel:first-child img  { object-position: center top; }
+    .hero-collage-panel:nth-child(2) img { object-position: center 30%; }
+    .hero-collage-panel:nth-child(3) img { object-position: center 20%; }
+    .hero-collage-panel:last-child img   { object-position: center top; }
+
+    /* dark overlay so text is readable */
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.42);
+    }
+    /* text sits on top */
+    .hero-left {
+      position: relative; z-index: 2;
+      padding: 80px 40px;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center;
+      width: 100%;
     }
 
-    .hero-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pink-deep); background: rgba(242,189,208,0.2); border: 1px solid rgba(242,189,208,0.5); padding: 6px 16px; border-radius: 100px; margin-bottom: 28px; }
-    .hero-title { font-family: var(--serif); font-size: clamp(58px, 7vw, 92px); font-weight: 400; line-height: 1.03; letter-spacing: -0.01em; margin-bottom: 28px; }
-    .hero-title em { font-style: italic; color: var(--pink-deep); }
-    .hero-sub { font-size: 17px; font-weight: 300; line-height: 1.9; color: var(--mid); max-width: 480px; margin-bottom: 48px; }
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-title { font-family: var(--serif); font-size: clamp(52px, 6.5vw, 90px); font-weight: 400; line-height: 1.03; letter-spacing: -0.01em; margin-bottom: 40px; color: #fff; }
+    .hero-title em { font-style: italic; color: var(--pink); }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
     /* stats bar */
     .stats-bar { background: var(--charcoal); }
@@ -44,24 +63,6 @@
     .intro-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .intro-img { border-radius: 24px; overflow: hidden; height: 500px; position: relative; }
     .intro-img img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* event types grid */
-    .event-types { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
-    .event-type-card {
-      border-radius: 20px; overflow: hidden; height: 340px;
-      position: relative; cursor: pointer;
-    }
-    .event-type-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .event-type-card:hover img { transform: scale(1.04); }
-    .event-type-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(42,42,42,0.75) 0%, transparent 55%);
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 32px;
-    }
-    .event-type-tag { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 100px; display: inline-block; margin-bottom: 10px; }
-    .event-type-name { font-family: var(--serif); font-size: 28px; font-weight: 400; color: #fff; line-height: 1.1; margin-bottom: 6px; }
-    .event-type-desc { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.6; }
 
     /* partners */
     .partners-section { background: var(--cream); }
@@ -85,11 +86,12 @@
     .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; min-height: unset; }
-      .hero-right { height: 60vw; min-height: unset; }
-      .hero-left { min-height: unset; padding: 56px 20px; }
+      .hero { min-height: 100vw; }
+      .hero-left { padding: 40px 24px 60px; justify-content: center; }
+      .hero-title { font-size: clamp(36px, 9vw, 56px); margin-bottom: 24px; }
+      .hero-collage-panel:nth-child(3),
+      .hero-collage-panel:nth-child(4) { display: none; }
       .intro-split { grid-template-columns: 1fr; gap: 40px; }
-      .event-types { grid-template-columns: 1fr; }
       .testi-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -117,22 +119,33 @@
 
   <!-- HERO -->
   <div class="hero">
+    <!-- full-width collage background -->
+    <div class="hero-collage">
+      <div class="hero-collage-inner">
+        <div class="hero-collage-panel">
+          <img src="images/hero-collage-0.jpg" alt="SimplicityCo event" />
+        </div>
+        <div class="hero-collage-panel">
+          <img src="images/hero-collage-1.jpg" alt="SimplicityCo event" />
+        </div>
+        <div class="hero-collage-panel">
+          <img src="images/hero-collage-2.jpg" alt="SimplicityCo event" />
+        </div>
+        <div class="hero-collage-panel">
+          <img src="images/hero-collage-3.jpg" alt="SimplicityCo event" />
+        </div>
+      </div>
+    </div>
+    <!-- gradient overlay -->
+    <div class="hero-overlay"></div>
+    <!-- text on top -->
     <div class="hero-left">
-      <div class="hero-tag">Arizona &middot; Women's Wellness Community</div>
       <h1 class="hero-title">
         Where Women Come<br />to <em>Move &amp; Thrive.</em>
       </h1>
-      <p class="hero-sub">
-        I'm Alondra — a certified personal trainer who turned a 55-pound weight loss into a passion for empowering women through fitness, community, and connection. SimplicityCo Movement exists to help women grow stronger, inside and out.
-      </p>
       <div class="hero-actions">
         <a href="events.html" class="btn-primary">View Upcoming Events</a>
-        <a href="about.html" class="btn-outline">My Story</a>
       </div>
-    </div>
-    <div class="hero-right">
-      <img src="images/alondra-hero.jpg" alt="Alondra — Founder of SimplicityCo Movement" onerror="this.onerror=null;this.src='images/event-circle.jpg';" />
-      <div class="hero-right-overlay"></div>
     </div>
   </div>
 
@@ -199,32 +212,6 @@
           <a href="about.html" class="btn-primary">Meet Alondra</a>
           <a href="events.html" class="btn-outline">See Events</a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EVENT TYPES -->
-  <section style="background:var(--cream);">
-    <div class="container">
-      <div class="section-tag">Two Experiences, One Community</div>
-      <h2 class="section-title">Move your body.<br /><em>Expand your network.</em></h2>
-      <div class="event-types">
-        <a href="events.html" class="event-type-card">
-          <img src="images/event-bands-overhead.jpg" alt="Movement Events" />
-          <div class="event-type-overlay">
-            <span class="event-type-tag">Movement Events</span>
-            <div class="event-type-name">Workout Together</div>
-            <p class="event-type-desc">High-energy, empowering workouts designed to romanticize movement and build genuine community.</p>
-          </div>
-        </a>
-        <a href="events.html" class="event-type-card">
-          <img src="images/event-networking.jpg" alt="Networking Workshops" />
-          <div class="event-type-overlay">
-            <span class="event-type-tag">Workshops</span>
-            <div class="event-type-name">Grow Your Network</div>
-            <p class="event-type-desc">Intentional gatherings for personal growth, business building, and connection with like-minded women.</p>
-          </div>
-        </a>
       </div>
     </div>
   </section>
