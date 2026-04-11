@@ -66,14 +66,29 @@
     .mosaic-img img { width: 100%; height: 100%; object-fit: cover; }
 
     @media (max-width: 900px) {
+      /* prevent any horizontal overflow */
+      html, body { overflow-x: hidden; max-width: 100%; }
+
       .about-hero-split { grid-template-columns: 1fr; min-height: unset; }
       .about-hero-right { height: 100vw; }
       .about-hero-left { padding: 56px 20px; }
+      .about-hero-left::before { width: 200px; height: 200px; }
+
       .story-split { grid-template-columns: 1fr; gap: 40px; }
       .values-grid { grid-template-columns: 1fr; }
       .photo-mosaic { grid-template-columns: 1fr; height: auto; }
       .mosaic-img:first-child { grid-row: 1; height: 300px; }
       .mosaic-img { height: 220px; }
+
+      /* mission & values inline grid */
+      .about-mission-grid { grid-template-columns: 1fr !important; }
+
+      /* photo gallery inline grid */
+      .about-gallery-grid { grid-template-columns: 1fr 1fr !important; }
+      .about-gallery-grid > div:last-child { grid-column: span 1 !important; }
+
+      /* stat strip */
+      .stat-strip { flex-direction: column !important; gap: 24px !important; padding: 32px 20px !important; }
     }
   </style>
 </head>
@@ -137,7 +152,7 @@
   <!-- MISSION & VALUES -->
   <section style="background:#fff;">
     <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
+      <div class="about-mission-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
         <div class="mission-box">
           <div class="section-tag">Our Mission</div>
           <div class="mission-statement">"Empowering women through movement, connection, and business growth."</div>
@@ -177,7 +192,7 @@
     <div class="container">
       <div class="section-tag">The Community in Action</div>
       <h2 class="section-title">Real events.<br /><em>Real women.</em></h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:40px;">
+      <div class="about-gallery-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:40px;">
         <div style="border-radius:20px;overflow:hidden;height:280px;"><img src="images/event-circle.jpg" alt="Event" style="width:100%;height:100%;object-fit:cover;" /></div>
         <div style="border-radius:20px;overflow:hidden;height:280px;"><img src="images/event-large-class.jpg" alt="Event" style="width:100%;height:100%;object-fit:cover;" /></div>
         <div style="border-radius:20px;overflow:hidden;height:280px;"><img src="images/event-group-photo.jpg" alt="Event" style="width:100%;height:100%;object-fit:cover;" /></div>
