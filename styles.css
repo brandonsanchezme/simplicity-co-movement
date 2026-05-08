@@ -13,8 +13,8 @@
   --sans:       'Montserrat', sans-serif;
 }
 
-html { scroll-behavior: smooth; }
-body { font-family: var(--sans); color: var(--charcoal); background: #fff; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+body { font-family: var(--sans); color: var(--charcoal); background: #fff; overflow-x: hidden; max-width: 100%; }
 
 /* ── NAV ─────────────────────────────────────────────── */
 nav {
